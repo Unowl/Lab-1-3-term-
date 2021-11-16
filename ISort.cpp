@@ -5,18 +5,7 @@
 #include <chrono>
 
 using namespace std;
-/*
-template<typename T>
-LinkedListSequence<T>* Contact(LinkedListSequence<T>* list1, LinkedListSequence<T>* list2){
-        int len, item;
-        len = list2 -> GetLength();
-        for(int i=0; i<len; ++i){
-           item = list2 -> Get(i);
-           list1 -> Append(item);
-        }
-        return list1;
-}
-*/
+
 template<typename T>
 void Replace(LinkedListSequence<T>* seq, int a, int b , char test = 'n')
 {
@@ -42,80 +31,7 @@ void Replace(ArraySequence<T>* seq, int a, int b, char test = 'n')
     seq -> Set(tem, b);
     if (test == 'y') TestReplace(seq, elem1, elem2, a, b);
 }
-/*
-template<typename T>
-LinkedListSequence<T>* FastSortLinkedList(LinkedListSequence<T>* seq) //int st, int ed)
-{
-    int elem, RefElemNum, len;
-    LinkedListSequence<int> leftL;
-    LinkedListSequence<int> rightL;
-    LinkedListSequence<int>* L;
-    leftL = LinkedListSequence<int>();
-    rightL = LinkedListSequence<int>();
-    len = seq -> GetLength();
-    if (len > 1)
-    {
-        RefElemNum = seq -> Get(len/2);
-        for(int i = 0; i<len; ++i)
-        {
-            elem = seq -> Get(i);
-            if (elem > RefElemNum)
-            {
-                rightL.Append(elem);
-            }
-            else
-            {
-                leftL.Append(elem);
-            }
-        }
-        L = Contact(FastSortLinkedList1(&leftL), FastSortLinkedList1(&rightL));
 
-        return L;
-
-    }
-    else
-    {
-        return seq;
-    }
-}
-
-/*
-template<typename T>
-Sequence<T>* Sort(Sequence<T>* seq)//,int (*cmp)(T,T));
-{
-
-
-
-}
- */
-/*
-template<typename T>
-void FastSort(LinkedListSequence<T>* seq, int low, int high)
-{
-    int i = low;
-    int j = high;
-    int pivot = seq -> Get((i + j) / 2);
-    int temp;
-
-    while (i <= j)
-    {
-        while (seq -> Get(i) < pivot)
-            i++;
-        while (seq -> Get(j) > pivot)
-            j--;
-        if (i <= j)
-        {
-            Replace(seq, i, j);
-            i++;
-            j--;
-        }
-    }
-    if (j > low)
-        FastSort(seq, low, j);
-    if (i < high)
-        FastSort(seq, i, high);
-}
-*/
 
 template<class T>
 void TestSort(T* seq, int Start = 0, int End = -1)
@@ -189,43 +105,7 @@ void FastSort(T* seq, int Start = 0, int End = -1, bool Reverse = false)
     if (i < End)
         FastSort(seq, i, End, Reverse);
 }
- /*
-template<typename T>
-void ShakerSort(LinkedListSequence<T>* seq, int Start, int End)
-{
-    int i, Left, Right;
-    Left=Start+1;
-    Right=End;
-    while (Left<=Right)
-    {
 
-    for (i=Right; i>=Left; i--)
-        if (seq -> Get(i-1) > seq -> Get(i)) Replace(seq, i , i-1);
-    Left++;
-    for (i=Left; i<=Right; i++)
-        if (seq -> Get(i-1) > seq -> Get(i)) Replace(seq, i , i-1);
-    Right--;
-    }
-}
-
-template<typename T>
-void ShakerSort(ArraySequence<T>* seq, int Start, int End)
-{
-    int i, Left, Right;
-    Left=Start+1;
-    Right=End;
-    while (Left<=Right)
-    {
-
-    for (i=Right; i>=Left; i--)
-        if (seq -> Get(i-1) > seq -> Get(i)) Replace(seq, i , i-1);
-    Left++;
-    for (i=Left; i<=Right; i++)
-        if (seq -> Get(i-1) > seq -> Get(i)) Replace(seq, i , i-1);
-    Right--;
-    }
-}
-*/
 template<class T>
 void ShakerSort(T* seq, int Start = 0, int End = -1, bool Reverse = false)
 {
@@ -403,58 +283,6 @@ int main()
 
     srand(time(NULL));
     ISort();
-/*
-   // long seconds;
-   // srand(time(NULL));
-//for (int flag = 1; flag <= 6; flag++)
-//{
-//    for (int k = 9000; k <= 10000; k=k+1000)
-//    {
-/*
-        int* data =  new int[10];
-        for (int i = 0; i < 10; ++i)
-        {
-            data[i] = rand() % 1000;
-        }
-        LinkedListSequence<int>a(data,10);
-        a.Print();
-        ShellSort(&a, 0, -1, true);
-        a.Print();
-        TestSort(&a);
 
-//        LinkedListSequence<int>a(data,10000);
-       // auto begin = std::chrono::steady_clock::now();
-       /*
-        if (flag == 1) FastSort(&a);
-        if (flag == 2) ShellSort(&a);
-        if (flag == 3) ShakerSort(&a);
-        if (flag == 4) FastSort(&l);
-        if (flag == 5) ShellSort(&l);
-        if (flag == 6) ShakerSort(&l);
-
-       // a.Print();
-        FastSort(&l);
-       // l.RemoveAt(9);
-        //l.InsertAt(-1, 9);
-     //   Sort(&a, 1, -3, 8);
-       // TestSort(&a);
-       // Replace(&l, 2, 5);
-      //  a.Print();
-     //   auto end = std::chrono::steady_clock::now();
-     //   auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-     //   seconds = elapsed_ms.count();
-
-        if (flag == 1 && k == 1000) cout<< "ArraySequence" <<endl;
-        if (flag == 4 && k == 1000) cout<< "LinkedListSequence" <<endl;
-        if (flag % 3 == 1 && k == 1000)cout<< "FastSort" <<endl;
-        if (flag % 3 == 2 && k == 1000)cout<< "ShellSort" <<endl;
-        if (flag % 3 == 0 && k == 1000)cout<< "ShakerSort" <<endl;
-
-     //   cout <<"The time: "<< seconds <<" milliseconds with the number of data ="<< k <<endl;
-
-
-  //  }
-//}
-*/
     return 0;
 }
